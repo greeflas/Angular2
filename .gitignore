@@ -1,2 +1,5 @@
+# WebStorm files
+.idea
+
 # Node vendor dir
 node_modules
