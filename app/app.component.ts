@@ -5,19 +5,22 @@ import { FormsModule } from "@angular/forms";
 
 import { Task } from "./Task";
 
-const tasks = [
+const tasks: Task[] = [
     {
         title: 'Learn JavaScript',
+        description: '',
         priority: 10,
         completed: true
     },
     {
         title: 'Learn Angular 2',
+        description: '',
         priority: 10,
         completed: false
     },
     {
         title: 'Create application',
+        description: '',
         priority: 9,
         completed: false
     }
@@ -46,8 +49,8 @@ const tasks = [
     styleUrls: ['app.component.css']
 })
 export class AppComponent {
-    title = 'Angular 2';
-    tasks = tasks;
+    title: string = 'Angular 2';
+    tasks: Task[] = tasks;
 
     newTitle: string = '';
     newPriority: number = 1;
@@ -67,7 +70,7 @@ export class AppComponent {
     }
 
     getCompletedTasks() {
-        let result: any = [];
+        let result: Task[] = [];
         for (let task of tasks) {
             if (task.completed) {
                 result.push(task);
@@ -78,7 +81,7 @@ export class AppComponent {
     }
 
     getUnCompletedTasks() {
-        let result: any = [];
+        let result: Task[] = [];
         for (let task of tasks) {
             if (!task.completed) {
                 result.push(task);
@@ -88,11 +91,11 @@ export class AppComponent {
         return result;
     }
 
-    completeTask(task: any) {
+    completeTask(task: Task) {
         task.completed = true;
     }
 
-    openTask(task: any) {
+    openTask(task: Task) {
         task.completed = false;
     }
 }
