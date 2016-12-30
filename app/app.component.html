@@ -9,18 +9,33 @@
     <main class="content">
         <div class="row">
             <div class="col-md-6">
-                <!-- Uncompleted tasks list -->
+                <!-- Opened tasks list -->
                 <section class="panel panel-default" *ngIf="getUnCompletedTasks().length">
-                    <div class="panel-heading">Uncompleted tasks</div>
+                    <div class="panel-heading">Opened tasks</div>
                     <div class="panel-body">
-                        <ul class="list-group" *ngFor="let task of getUnCompletedTasks()">
-                            <li class="list-group-item" (click)="completeTask(task)" [class.active]="!  task.completed">
-                                <!-- Task title -->
-                                {{ task.title }}
-                                <!-- Task priority -->
-                                <span class="badge">{{ task.priority }}</span>
-                            </li>
-                        </ul>
+                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" *ngFor="let task of getUnCompletedTasks()">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingOne">
+                                    <h4 class="panel-title">
+                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#{{ task.id }}">
+                                            <!-- Task priority -->
+                                            <span class="badge">{{ task.priority }}</span>
+                                            <!-- Task title -->
+                                            {{ task.title }}
+                                            <!-- Close task -->
+                                            <button class="btn btn-xs btn-success pull-right" (click)="completeTask(task)">
+                                                <span class="glyphicon glyphicon-ok"></span>
+                                            </button>
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="{{ task.id }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                    <div class="panel-body">
+                                        {{ task.description }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </section>
                 <!-- /Uncompleted tasks list -->
@@ -31,9 +46,12 @@
                     <div class="panel-heading">Completed tasks</div>
                     <div class="panel-body">
                         <ul class="list-group" *ngFor="let task of getCompletedTasks()">
-                            <li class="list-group-item" (click)="openTask(task)">
+                            <li class="list-group-item">
                             <!-- Task title -->
                                 <del>{{ task.title }}</del>
+                                <button class="btn btn-xs btn-danger pull-right" (click)="openTask(task)">
+                                    <span class="glyphicon glyphicon-share-alt"></span>
+                                </button>
                             </li>
                         </ul>
                     </div>

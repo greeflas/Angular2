@@ -7,20 +7,23 @@ import { Task } from "./Task";
 
 const tasks: Task[] = [
     {
+        id: 1,
         title: 'Learn JavaScript',
-        description: '',
+        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
         priority: 10,
         completed: true
     },
     {
+        id: 2,
         title: 'Learn Angular 2',
-        description: '',
+        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
         priority: 10,
         completed: false
     },
     {
+        id: 3,
         title: 'Create application',
-        description: '',
+        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
         priority: 9,
         completed: false
     }
@@ -49,9 +52,10 @@ const tasks: Task[] = [
     styleUrls: ['app.component.css']
 })
 export class AppComponent {
-    title: string = 'Angular 2';
-    tasks: Task[] = tasks;
+    title: string = 'Task manager';
 
+    tasks: Task[] = tasks;
+    id: number = 4;
     newTitle: string = '';
     newPriority: number = 1;
     newDescription: string = '';
@@ -63,7 +67,7 @@ export class AppComponent {
     }
 
     addTask() {
-        let task: Task = new Task(this.newTitle, this.newDescription, this.newPriority);
+        let task: Task = new Task(this.id++, this.newTitle, this.newDescription, this.newPriority);
         tasks.push(task);
 
         this.resetFields();
