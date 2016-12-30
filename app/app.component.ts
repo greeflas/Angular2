@@ -1,6 +1,9 @@
 /* Application component */
 
 import { Component } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+
+import { Task } from "./Task";
 
 const tasks = [
     {
@@ -45,6 +48,23 @@ const tasks = [
 export class AppComponent {
     title = 'Angular 2';
     tasks = tasks;
+
+    newTitle: string = '';
+    newPriority: number = 1;
+    newDescription: string = '';
+
+    private resetFields() {
+        this.newTitle = '';
+        this.newPriority = 1;
+        this.newDescription = '';
+    }
+
+    addTask() {
+        let task: Task = new Task(this.newTitle, this.newDescription, this.newPriority);
+        tasks.push(task);
+
+        this.resetFields();
+    }
 
     getCompletedTasks() {
         let result: any = [];
