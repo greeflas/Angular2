@@ -67,4 +67,12 @@ export class AppComponent {
 
         return result;
     }
+
+    completeTask(task: any) {
+        task.completed = true;
+    }
+
+    openTask(task: any) {
+        task.completed = false;
+    }
 }

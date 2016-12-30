@@ -14,11 +14,11 @@
                     <div class="panel-heading">Uncompleted tasks</div>
                     <div class="panel-body">
                         <ul class="list-group" *ngFor="let task of getUnCompletedTasks()">
-                            <li class="list-group-item active">
+                            <li class="list-group-item" (click)="completeTask(task)" [class.active]="!task.completed">
                                 <!-- Task title -->
                                 {{ task.title }}
                                 <!-- Task priority -->
-                                <span class="badge">{{ task.priority   }}</span>
+                                <span class="badge">{{ task.priority }}</span>
                             </li>
                         </ul>
                     </div>
@@ -31,7 +31,7 @@
                     <div class="panel-heading">Completed tasks</div>
                     <div class="panel-body">
                         <ul class="list-group" *ngFor="let task of getCompletedTasks()">
-                            <li class="list-group-item">
+                            <li class="list-group-item" (click)="openTask(task)">
                             <!-- Task title -->
                                 <del>{{ task.title }}</del>
                             </li>
