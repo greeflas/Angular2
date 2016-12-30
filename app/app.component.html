@@ -9,25 +9,36 @@
     <main class="content">
         <div class="row">
             <div class="col-md-6">
-            <!-- Task list -->
-                <section class="panel panel-default">
-                    <div class="panel-heading">Tasks</div>
+                <!-- Uncompleted tasks list -->
+                <section class="panel panel-default" *ngIf="getUnCompletedTasks().length">
+                    <div class="panel-heading">Uncompleted tasks</div>
                     <div class="panel-body">
-                        <ul class="list-group">
+                        <ul class="list-group" *ngFor="let task of getUnCompletedTasks()">
                             <li class="list-group-item active">
-                            <!-- Task title -->
-                                Learn Angular 2
-                            <!-- Task priority -->
-                                <span class="badge">10</span>
-                            </li>
-                            <li class="list-group-item">
-                                Create application
-                                <span class="badge">9</span>
+                                <!-- Task title -->
+                                {{ task.title }}
+                                <!-- Task priority -->
+                                <span class="badge">{{ task.priority   }}</span>
                             </li>
                         </ul>
                     </div>
                 </section>
-            <!-- /Task list -->
+                <!-- /Uncompleted tasks list -->
+            </div>
+            <div class="col-md-6">
+            <!-- Completed tasks list -->
+                <section class="panel panel-default" *ngIf="getCompletedTasks().length">
+                    <div class="panel-heading">Completed tasks</div>
+                    <div class="panel-body">
+                        <ul class="list-group" *ngFor="let task of getCompletedTasks()">
+                            <li class="list-group-item">
+                            <!-- Task title -->
+                                <del>{{ task.title }}</del>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+            <!-- /Completed tasks list -->
             </div>
         </div>
     </main>

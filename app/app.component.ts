@@ -2,6 +2,24 @@
 
 import { Component } from "@angular/core";
 
+const tasks = [
+    {
+        title: 'Learn JavaScript',
+        priority: 10,
+        completed: true
+    },
+    {
+        title: 'Learn Angular 2',
+        priority: 10,
+        completed: false
+    },
+    {
+        title: 'Create application',
+        priority: 9,
+        completed: false
+    }
+];
+
 @Component({
     moduleId: module.id,
     selector: 'app', // HTML tag for application in index.html
@@ -26,4 +44,27 @@ import { Component } from "@angular/core";
 })
 export class AppComponent {
     title = 'Angular 2';
+    tasks = tasks;
+
+    getCompletedTasks() {
+        let result: any = [];
+        for (let task of tasks) {
+            if (task.completed) {
+                result.push(task);
+            }
+        }
+
+        return result;
+    }
+
+    getUnCompletedTasks() {
+        let result: any = [];
+        for (let task of tasks) {
+            if (!task.completed) {
+                result.push(task);
+            }
+        }
+
+        return result;
+    }
 }
