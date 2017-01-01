@@ -1,33 +1,10 @@
 /* Application component */
 
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 
 import { Task } from "./Task";
-
-const tasks: Task[] = [
-    {
-        id: 1,
-        title: 'Learn JavaScript',
-        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        priority: 10,
-        completed: true
-    },
-    {
-        id: 2,
-        title: 'Learn Angular 2',
-        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        priority: 10,
-        completed: false
-    },
-    {
-        id: 3,
-        title: 'Create application',
-        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        priority: 9,
-        completed: false
-    }
-];
+import { TaskService } from "./task.service";
 
 @Component({
     moduleId: module.id,
@@ -49,16 +26,24 @@ const tasks: Task[] = [
     /* CSS styles */
     // styles: []
     /* or */
-    styleUrls: ['app.component.css']
+    styleUrls: ['app.component.css'],
+    providers: [ TaskService ] // Services
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
     title: string = 'Task manager';
 
-    tasks: Task[] = tasks;
+    tasks: Task[] = [];
     id: number = 4;
     newTitle: string = '';
     newPriority: number = 1;
     newDescription: string = '';
+
+    // Using Dependency Injection for create a service
+    constructor(private service: TaskService) { }
+
+    ngOnInit() {
+        this.tasks = this.service.getTasks();
+    }
 
     private resetFields() {
         this.newTitle = '';
@@ -68,14 +53,14 @@ export class AppComponent {
 
     addTask() {
         let task: Task = new Task(this.id++, this.newTitle, this.newDescription, this.newPriority);
-        tasks.push(task);
+        this.tasks.push(task);
 
         this.resetFields();
     }
 
     getCompletedTasks() {
         let result: Task[] = [];
-        for (let task of tasks) {
+        for (let task of this.tasks) {
             if (task.completed) {
                 result.push(task);
             }
@@ -86,7 +71,7 @@ export class AppComponent {
 
     getUnCompletedTasks() {
         let result: Task[] = [];
-        for (let task of tasks) {
+        for (let task of this.tasks) {
             if (!task.completed) {
                 result.push(task);
             }
