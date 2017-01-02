@@ -3,13 +3,12 @@
 import { Component, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 
-import { Task } from "./Task";
-import { TaskService } from "./task.service";
+import { Task } from "./models/task";
+import { TaskService } from "./services/task.service";
 
 @Component({
     moduleId: module.id,
     selector: 'app', // HTML tag for application in index.html
-
     /* #1 - template for view */
     // template: '<h1>Angular 2</h1>'
     /* #2 - using class property in template */
@@ -22,7 +21,6 @@ import { TaskService } from "./task.service";
     // `
     /* #4 - using view file for template */
     templateUrl: 'app.component.html',
-
     /* CSS styles */
     // styles: []
     /* or */
@@ -33,7 +31,6 @@ export class AppComponent implements OnInit {
     title: string = 'Task manager';
 
     tasks: Task[] = [];
-    id: number = 4;
     newTitle: string = '';
     newPriority: number = 1;
     newDescription: string = '';
@@ -52,7 +49,7 @@ export class AppComponent implements OnInit {
     }
 
     addTask() {
-        let task: Task = new Task(this.id++, this.newTitle, this.newDescription, this.newPriority);
+        let task: Task = new Task(this.newTitle, this.newDescription, this.newPriority);
         this.tasks.push(task);
 
         this.resetFields();
