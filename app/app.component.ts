@@ -31,9 +31,9 @@ export class AppComponent implements OnInit {
     title: string = 'Task manager';
 
     tasks: Task[] = [];
-    newTitle: string = '';
-    newPriority: number = 1;
-    newDescription: string = '';
+    taskTitle: string = '';
+    taskPriority: number = 1;
+    taskDescription: string = '';
 
     // Using Dependency Injection for create a service
     constructor(private service: TaskService) { }
@@ -43,13 +43,13 @@ export class AppComponent implements OnInit {
     }
 
     private resetFields() {
-        this.newTitle = '';
-        this.newPriority = 1;
-        this.newDescription = '';
+        this.taskTitle = '';
+        this.taskPriority = 1;
+        this.taskDescription = '';
     }
 
     addTask() {
-        let task: Task = new Task(this.newTitle, this.newDescription, this.newPriority);
+        let task: Task = new Task(this.taskTitle, this.taskDescription, this.taskPriority);
         this.tasks.push(task);
 
         this.resetFields();

@@ -66,26 +66,26 @@
                         <form (ngSubmit)="addTask(); addTaskForm.reset()" #addTaskForm="ngForm">
                             <div class="row">
                                 <div class="col-md-11">
-                                    <div class="form-group">
-                                        <label for="task-title">Title</label>
-                                        <input type="text" id="task-title" class="form-control" tabindex="1"
-                                               name="title" [(ngModel)]="newTitle">
+                                    <div class="form-group" [ngClass]="{ 'has-error': !(title.valid || title.pristine) }">
+                                        <label for="task-title" class="control-label">Title</label>
+                                        <input type="text" id="task-title" class="form-control" tabindex="1" required
+                                               name="taskTitle" [(ngModel)]="taskTitle" #title="ngModel">
                                     </div>
                                 </div>
                                 <div class="col-md-1">
-                                    <div class="form-group">
-                                        <label for="task-priority">Priority</label>
-                                        <input type="number" id="task-priority" class="form-control"
+                                    <div class="form-group" [ngClass]="{ 'has-error': !(priority.valid || priority.pristine) }">
+                                        <label for="task-priority" class="control-label">Priority</label>
+                                        <input type="number" id="task-priority" class="form-control" required
                                                min="1" max="10" value="1" tabindex="2"
-                                               name="priority" [(ngModel)]="newPriority">
+                                               name="taskPriority" [(ngModel)]="taskPriority" #priority="ngModel">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="task-description">Description</label>
+                                <label for="task-description" class="control-label">Description</label>
                                 <textarea id="task-description" class="form-control"
                                           cols="30" rows="10" tabindex="3"
-                                          name="description" [(ngModel)]="newDescription"></textarea>
+                                          name="taskDescription" [(ngModel)]="taskDescription"></textarea>
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-success pull-right" tabindex="4">Add</button>
